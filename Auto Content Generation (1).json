@@ -1,0 +1,1074 @@
+{
+  "name": "Auto Content Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"linkedin_caption\": \"✨ The architecture industry in 2023 has been a beacon of innovation, pushing the boundaries of sustainable design. From building electrification to the creative use of adaptive reuse, architectural firms worldwide are redefining modern design with sustainability at the forefront. 🌿 The advent of Passive House standards signals a shift towards energy efficiency, resulting in healthier living environments and reduced carbon footprints. Moreover, innovative materials like recycled composites and bio-based cladding are leading the charge, providing architects with tools to create both aesthetically pleasing and environmentally conscious buildings. 🏛️ Public policies are also playing a significant role, encouraging energy-efficient constructions that align with global sustainability goals. As we delve deeper into these trends, we must ask ourselves: how can we further integrate these practices into everyday designs?👉 Follow AAB Architecture for weekly insights on bringing innovation and sustainability into harmony. #Innovation #Construction #FutureOfArchitecture #ModernDesign #Leadership #AABArchitecture #Architecture\",\n  \"instagram_caption\": \"Discover 2023's most groundbreaking sustainable design innovations! 🌿 From Passive House principles to recycled materials, these trends are shaping our future. Swipe to learn more! *Visit our website: https://aab.archi/* #ArchitectureLife #DesignInnovation #InteriorDesignTips #Designing #Engineering\",\n  \"facebook_caption\": \"This year has seen amazing strides in sustainable architecture. With innovations like passive homes and cutting-edge building materials redefining our spaces, we're excited to see where the future will lead. What’s your favourite innovation? Share your thoughts below! #ConstructionDesign #Entrepreneurship #Leadership #InteriorDesignInnovation #AABArchitecture\",\n  \"slides\": [\n    {\n      \"slide1\": \"A Year of Sustainable Architectural Innovation\"\n    },\n    {\n      \"slide2\": \"Innovative materials like recycled composites are leading the charge.\"\n    },\n    {\n      \"slide3\": \"Passive House standards offer energy efficiency and reduced footprints.\"\n    },\n    {\n      \"slide4\": \"Adaptive reuse creatively transforms existing spaces sustainably.\"\n    },\n    {\n      \"slide5\": \"Follow AAB Architecture for more on modern, sustainable design.\"\n    }\n  ]\n}\n"
+      },
+      "id": "36950ec6-9af9-4eea-9081-dc51e3fe50f9",
+      "name": "Social Media Content1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        1056,
+        768
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "b6642870-8707-419c-9f46-6aa4d83971b7",
+      "name": "SerpAPI1",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "position": [
+        672,
+        768
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# 🎯 **WHAT YOU MUST GENERATE**\n\n## **1. LinkedIn Caption (8–12 sentences)**\n\n**Style:**\n\nProfessional, educational, deeper insight.\n\n**Tone:**\n\nBusiness-oriented, thoughtful, meaningful, architecture-driven.\n\n**Format Requirements:**\n\n- Strong hook\n- Well-structured explanation (reasons, insights, logic)\n- Use emojis sparingly (like ✨ 🌿 🏛️ when relevant)\n- End with a clear CTA (e.g., “👉 Follow AAB Architecture for weekly insights.”)\n- Hashtags:\n    \n    `#Innovation #Construction #FutureOfArchitecture #ModernDesign #Leadership #AABArchitecture #Architecture`\n    \n\n## **2. Instagram Caption (2–3 sentences)**\n\n**Style:**\n\nVisual storytelling.\n\n**Tone:**\n\nInspirational, warm, engaging.\n\n**Rules:**\n\n- Use emojis\n- Add CTA like:\n    \n    “Swipe to learn more,” “Save this for later,” “Tag your team,” etc.\n    \n- If link provided → place link BEFORE hashtags\n- If no link → write: *Visit our website: https://aab.archi/*\n- Hashtags:\n    \n    `#ArchitectureLife #DesignInnovation #InteriorDesignTips #Designing #Engineering`\n    \n\n## **3. Facebook Caption (2–3 sentences)**\n\n**Style:**\n\nFriendly, community-focused.\n\n**Tone:**\n\nRelatable, conversational, still professional.\n\n**Rules:**\n\n- Mention people, teams, achievements\n- CTA:\n    \n    “What’s your favourite innovation?”\n    \n    “Share your thoughts below!”\n    \n- Hashtags:\n    \n    `#ConstructionDesign #Entrepreneurship #Leadership #InteriorDesignInnovation #AABArchitecture`\n    \n\n## **4. Slide Text (max 5 slides)**\n\nGenerate **short, clear text for media design**, based specifically on the **LinkedIn caption’s points**.\n\n**Rules:**\n\n- Max 5 slides\n- Slide 1 = Hook / Big Idea\n- Slides 2–4 = Key points (1–2 sentences each max)\n- Slide 5 = CTA\n- No emojis\n- No long phrases\n- No more than **1–2 sentences per slide**\n\n**Example style (not content):**\n\nSlide 1:\n\n“5 Architectural Principles That Always Work”\n\nSlide 2:\n\n“Functional layouts improve comfort and efficiency in any space.”\n\nSlide 3:\n\n“Sustainable design choices reduce energy use and long-term costs.”\n\nSlide 4:\n\n“Architecture shapes identity — for homes, brands, and communities.”\n\nSlide 5:\n\n“Follow AAB Architecture for insights on modern, functional design.”\n\n# ⚠️ IMPORTANT RULES\n\n- Max 5 slides\n- Slide texts MUST come from the **LinkedIn caption’s logic**\n- No long paragraphs in slides\n- Captions must be platform-tailored\n- Maintain AAB’s brand voice\n- NEVER include more than the required output fields\n- ALWAYS output in specified format\n\n# Useful inputs\n- Post idea: {{ $json.output.title }}\n- Slide breakdown: {{ $json.output.slide_breakdown }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Use the provided research tools to analyze the topic using the latest available information. Today’s date is {{ $now }}.\n\nYou are the **Carousel Content Generator AI** for **AAB Architecture**, a studio known for **modern, functional, and sustainable design solutions**.\n\nYour task is to transform the input topic into:\n\n1. **A LinkedIn caption**\n2. **An Instagram caption**\n3. **A Facebook caption**\n4. **Short slide texts (max 5 slides)** for carousel media creation\n\nAll outputs must reflect AAB’s values:\n\n**Innovation, functionality, global perspective, and collaborative, high-quality execution.**"
+        }
+      },
+      "id": "a7559ebe-e21f-4573-8517-fc2bc45461af",
+      "name": "Single Image Content Factory1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        736,
+        544
+      ],
+      "retryOnFail": true,
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "model": "gpt-image-1",
+        "prompt": "={{ $json.prompt }}",
+        "options": {}
+      },
+      "id": "ede43702-7525-4c64-a367-7a70a836e7b2",
+      "name": "OpenAI1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2512,
+        576
+      ],
+      "typeVersion": 1.8,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You will receive a list of slides (max 5), each containing short text that must appear on the final carousel design.\n\nYour tasks:\n\n1. **Analyze the slide texts**\n2. **Create a DALL·E prompt** for each slide\n3. **Follow AAB Architecture’s visual identity**, described below\n4. Output a structured JSON array\n\n---\n\n# 🎨 **AAB ARCHITECTURE VISUAL STYLE GUIDE (NO IMAGES PROVIDED)**\n\nAll slides share the same aesthetic:\n\n**Minimalist, clean, architectural, beige color palette.**\n\nInspired by modern architecture presentation boards.\n\n---\n\n## **Slide 1 — Cover Slide (signature look)**\n\nDescribe these elements in the DALL·E prompt:\n\n- **Minimalist architectural cover**\n- **Warm beige background** (soft, slightly textured)\n- **Stacked bold title** using the slide text\n- Right side: a **clean modern architectural photograph**\n    - Concrete, soft shadows, geometric forms, corridor or aperture\n    - No people\n- Balanced grid layout\n- Minimal AAB-style brand mark in corner\n\nThis slide MUST look visually distinct:\n\n**Architectural photo + bold headline composition.**\n\n---\n\n## **Slides 2–5 — Inner Slides (text-based)**\n\nDescribe these elements in the DALL·E prompt:\n\n- Same **beige background** as slide 1\n- Minimal editorial layout\n- Header at top: **“ARCHITECTURE INSIGHTS”** (small, uppercase)\n- Bold title or statement with the slide text (max 1–2 sentences)\n- Clean spacing, black typography\n- Very subtle gradient or shadow allowed\n- **No photos** — inner slides are text-only\n- Minimal black brand mark bottom corner\n\n# 🔧 **DALL·E Prompt Requirements**\n\nEach prompt MUST:\n\n- Describe layout, composition, color, typography\n- Include the slide text inside quotes → “[Slide text]”\n- Use clear architectural terminology\n- Ensure text is rendered in clean, bold, modern typography\n- Avoid people\n- Avoid unnecessary elements\n- Do not mention platform names\n- Do not mention this prompt or workflow\n\n# Inputs:\n- Slide text:\n  Slide 1:{{ $json.output.slides[0].slide1 }}\n  Slide 2:{{ $json.output.slides[1].slide2 }}\n  Slide 3:{{ $json.output.slides[2].slide3 }}\n  Slide 4:{{ $json.output.slides[3].slide4 }}\n  Slide 5:{{ $json.output.slides[4].slide5 }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an AI Image Prompt Generator.\nYour job is to create DALL·E prompts for up to 5 carousel slides, using the slide texts provided by the previous agent.\n\nThe Image Agent receives ONLY:\nslides[ { slide_number, text } ]\n\nYou must output DALL·E prompts in the AAB Architecture visual style described below.\n\nYou must return a JSON array following the exact required structure."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1264,
+        544
+      ],
+      "id": "8eeca3c1-99a8-4ec7-ab2d-198e37baf519",
+      "name": "AI Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Carousel Content Strategy Agent').item.json.output.title }} {{ $runIndex }} ",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Create folder').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2064,
+        400
+      ],
+      "id": "20b5d360-cf49-4cc2-912b-361b20f33113",
+      "name": "Upload file"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2064,
+        768
+      ],
+      "id": "6e0f90a7-987b-4419-865f-a23b1b55ddb9",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "[\n  {\n    \"slide_number\": 1,\n    \"dalle_prompt\": \"...\"\n  },\n  {\n    \"slide_number\": 2,\n    \"dalle_prompt\": \"...\"\n  }\n]\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1408,
+        768
+      ],
+      "id": "54a36b79-c3b5-4810-925d-2a991a0bd4ba",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2288,
+        400
+      ],
+      "id": "5fa9b734-3073-4339-90d7-623dc4c81228",
+      "name": "Loop Over Items2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "text"
+        }
+      },
+      "id": "710101a1-e35b-40d5-a1f5-bbcb58d0a1f3",
+      "name": "gpt-4o LLM3",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        -304,
+        624
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "text"
+        }
+      },
+      "id": "a658e499-82ab-4460-9e11-64dc1a47f54c",
+      "name": "gpt-4o LLM4",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        544,
+        768
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "text"
+        }
+      },
+      "id": "018eb37d-15b2-43ce-bdf3-30492c12e1f5",
+      "name": "gpt-4o LLM5",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1280,
+        768
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "4af6647a-0cfc-4965-9ae9-38ff6c6da813",
+      "name": "SerpAPI3",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "position": [
+        -176,
+        624
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1200,
+        640
+      ],
+      "id": "b961f6c2-26c2-4497-ae85-c0f1fddee0b8",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI",
+          "mode": "list",
+          "cachedResultName": "Fully automated content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Carousel",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "media_link": "=https://drive.google.com/drive/u/5/folders/{{ $('Create folder').item.json.id }}",
+            "title": "={{ $('Carousel Content Strategy Agent').item.json.output.title }}",
+            "linkedin_caption": "={{ $('Single Image Content Factory1').item.json.output.linkedin_caption }}",
+            "instagram_caption": "={{ $('Single Image Content Factory1').item.json.output.instagram_caption }}",
+            "facebook_caption": "={{ $('Single Image Content Factory1').item.json.output.facebook_caption }}"
+          },
+          "matchingColumns": [
+            "title"
+          ],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "hook",
+              "displayName": "hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "reasoning",
+              "displayName": "reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "linkedin_caption",
+              "displayName": "linkedin_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instagram_caption",
+              "displayName": "instagram_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "facebook_caption",
+              "displayName": "facebook_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "media_link",
+              "displayName": "media_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2512,
+        352
+      ],
+      "id": "9878ce63-264e-4a25-9d2c-9d44328a928d",
+      "name": "Update row in sheet1"
+    },
+    {
+      "parameters": {
+        "sendTo": "test@artifuture.io",
+        "subject": "Auto Generated Content",
+        "emailType": "text",
+        "message": "Your content for this month has been created",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        800,
+        0
+      ],
+      "id": "37027931-9ef0-43fe-8cd6-0be74a5818e8",
+      "name": "Send a message",
+      "webhookId": "b1c46393-5f62-4ac9-a373-0c2608a7c420"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "searchText": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Term', ``, 'string') }}",
+        "limit": 2,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitterTool",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        624
+      ],
+      "id": "259617d6-634a-4ef7-9fe2-39654c538c1f",
+      "name": "Search Tweets in X"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=## **🔍 Your Tools**\n\nYou have access to:\n\n1. **SerpAPI** — search Google for architecture trends, problems, industry topics, news, and tutorials.\n2. **X (Twitter)** — find relevant discussions, expert threads, and trending architectural insights.\n3. **Reddit** — analyze r/architecture, r/architectureSchool, r/buildings, r/Design, and similar communities for questions, debates, and insights.\n4. **Google Sheets: Get Rows** — check previously created ideas to avoid duplicates.\n5. **Google Sheets: Append Row** — save all new content ideas to the CRM/Sheet.\n\nAlways check the Sheet first. If the idea already exists, skip it.\n\n## **🎨 Content Requirements**\n\nEvery idea must:\n\n- Provide **value-driven insights**\n- Be educational, actionable, or thought-provoking\n- Resonate with **architects, architecture enthusiasts, businesses, and design-driven users**\n- Fit well into a **carousel** (multi-slide post) format\n- Be suitable for brand-building and audience growth\n\nIdeas MUST NOT be generic. They must be based on **actual research**, using your tools above.\nNO MORE than 5 slides\n\n## **📌 For Each Idea, Provide the Following Structure**\n\nReturn results in a structured JSON array where each platform contains 8 objects like this:\n\n```\n{\n  \"title\": \"Title of the Carousel\",\n  \"hook\": \"Strong, scroll-stopping intro sentence\",\n  \"slide_breakdown\": [\n    \"Slide 1 – Intro\",\n    \"Slide 2 – Key insight\",\n    \"Slide 3 – Tutorial / example / breakdown\",\n    \"Slide 4 – Mistakes / alternatives / comparison\",\n    \"Slide 5 – CTA\"\n  ],\n  \"reasoning\": \"Why this topic matters to architects or businesses\",\n  \"sources_used\": [\"Google\", \"X\", \"Reddit\"],\n  \"already_in_sheet\": false}\n\n```\n\nIf `already_in_sheet = true`, skip and generate a new one.\n\nAt the end, append all new ideas to Google Sheet.\n\n## **🧠 Rules for Research & Tailoring Per Platform**\n\n### **Facebook**\n\n- More community-oriented\n- Slightly longer explanations\n- Encourage comments, discussions, and sharing\n- Wider topics that attract both homeowners and architecture enthusiasts\n\n### **Instagram**\n\n- Highly visual\n- Shorter, clean text\n- Focus on aesthetic appeal + educational breakdown\n- Hooks must be punchy and scroll-stopping\n\n### **LinkedIn**\n\n- Professional tone\n- Focus on business value, industry trends, innovation, workflows, sustainability, and productivity\n- Make insights useful for firms, architects, and design professionals\n\n## **🚫 Avoid**\n\n- Repeating any previous idea from Google Sheets\n- Generic ideas like “Top 5 tips for architects”\n- Overly promotional content\n- Long paragraphs — carousels require short, precise content\n\n## **🎯 Mission**\n\nGenerate **8 unique, high-value, research-backed carousel post ideas**, check duplicates, then save them.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an AI Content Strategy Agent specialized in creating high-value, research-based carousel post ideas for architecture firms.\nYour goal is to generate 8 carousel post ideas for each platform:\n- Facebook\n- Instagram\n- LinkedIn\n\nYou may generate the same 8 ideas across all platforms, but you must tailor the format, tone, and angle to fit each platform’s style and audience expectations."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -64,
+        400
+      ],
+      "id": "7e4884f5-b6e8-4f0e-9b98-9e60b49cbe44",
+      "name": "Carousel Content Strategy Agent",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"output\":{\n    \"title\": \"Title of the Carousel\",\n    \"hook\": \"Strong, scroll-stopping intro sentence\",\n    \"slide_breakdown\": [\n    \"Slide 1 – Intro\",\n    \"Slide 2 – Key insight\",\n    \"Slide 3 – Tutorial / example / breakdown\",\n    \"Slide 4 – Mistakes / alternatives / comparison\",\n    \"Slide 5 – CTA\"\n  ],\n    \"reasoning\": \"Why this topic matters to architects or businesses\",\n    \"sources_used\": [\"Google\", \"X\", \"Reddit\"],\n    \"already_in_sheet\": false }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        624
+      ],
+      "id": "d9348154-a2d9-462e-b910-5a333bc1daea",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI",
+          "mode": "list",
+          "cachedResultName": "Fully automated content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Carousel",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        624
+      ],
+      "id": "5b61d8c3-132e-478c-8ffd-d0c95d27a986",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "searchText": "architecture",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitterTool",
+      "typeVersion": 2,
+      "position": [
+        800,
+        768
+      ],
+      "id": "d3d016b2-90aa-47e9-95b5-41064306c66a",
+      "name": "Search Tweets in X2"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "location": "allReddit",
+        "keyword": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Keyword', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.redditTool",
+      "typeVersion": 1,
+      "position": [
+        928,
+        768
+      ],
+      "id": "5bdbed78-bf60-400d-958e-06388b58a5ef",
+      "name": "Search for a post in Reddit2"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "location": "allReddit",
+        "keyword": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Keyword', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.redditTool",
+      "typeVersion": 1,
+      "position": [
+        208,
+        624
+      ],
+      "id": "97cd6d71-c0b9-4613-a397-fe340a85e989",
+      "name": "Search for a post in Reddit"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -528,
+        400
+      ],
+      "id": "31695c77-df29-4793-9940-9f039ccbf4ca",
+      "name": "Loop Over Items3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2eae7dc2-d0e3-41db-a774-2481b068c701",
+              "name": "runnumber",
+              "value": "=[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\"]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -976,
+        400
+      ],
+      "id": "4d4ce8cb-51ce-4160-88a5-dda36d992d81",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "runnumber",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        400
+      ],
+      "id": "b2350843-f078-4e77-865f-0ad7ad8220d6",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('Carousel Content Strategy Agent').item.json.output.title }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1616,
+        480
+      ],
+      "id": "7b40efd7-9ab9-4a87-9fbf-5c45cb49ec52",
+      "name": "Create folder"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI",
+          "mode": "list",
+          "cachedResultName": "Fully automated content",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Carousel",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12oHidAtLeEboLNGkyGyo9vDlXHUcAsuP4M_77exTmSI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "title": "={{ $json.output.title }}",
+            "hook": "={{ $json.output.hook }}",
+            "reasoning": "={{ $json.output.reasoning }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hook",
+              "displayName": "hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reasoning",
+              "displayName": "reasoning",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin_caption",
+              "displayName": "linkedin_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "instagram_caption",
+              "displayName": "instagram_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "facebook_caption",
+              "displayName": "facebook_caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "media_link",
+              "displayName": "media_link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        800,
+        256
+      ],
+      "id": "2de850f2-5a8c-4b42-8893-fba8a055bd82",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2736,
+        672
+      ],
+      "id": "f2fcbbc1-c1e4-421c-8ee0-c497c77fc70d",
+      "name": "Wait",
+      "webhookId": "2b601f3a-77e0-4943-bbe1-0827d8225e5e"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1840,
+        480
+      ],
+      "id": "15c879e2-d137-478b-b783-a83608cc723c",
+      "name": "Merge1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Social Media Content1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Single Image Content Factory1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Single Image Content Factory1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Single Image Content Factory1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create folder",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gpt-4o LLM3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gpt-4o LLM4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Single Image Content Factory1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gpt-4o LLM5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI3": {
+      "ai_tool": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Tweets in X": {
+      "ai_tool": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Carousel Content Strategy Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Single Image Content Factory1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "ai_tool": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Tweets in X2": {
+      "ai_tool": [
+        [
+          {
+            "node": "Single Image Content Factory1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search for a post in Reddit2": {
+      "ai_tool": [
+        [
+          {
+            "node": "Single Image Content Factory1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search for a post in Reddit": {
+      "ai_tool": [
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Carousel Content Strategy Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create folder": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "35618bb7-5158-457a-8d5f-d042053e10a1",
+  "meta": {
+    "instanceId": "ae47af7f97f3f843adb84420e938ad250ac45b850068fa789c203bb403eb011f"
+  },
+  "id": "LQ0T24JhjUXyQej6",
+  "tags": []
+}
